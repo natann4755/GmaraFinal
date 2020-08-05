@@ -24,7 +24,6 @@ public class SederItem implements Parcelable {
 
     protected SederItem(Parcel in) {
         name = in.readString();
-        masechtot = in.createTypedArrayList(MasechetItem.CREATOR);
         isOpen = in.readByte() != 0;
     }
 
@@ -68,7 +67,6 @@ public class SederItem implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
-        dest.writeTypedList(masechtot);
         dest.writeByte((byte) (isOpen ? 1 : 0));
     }
 }

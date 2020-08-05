@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class TypeStudyProfileFragment extends Fragment implements RecyclerViewSt
     private static String KEY_profile = "KEY_profile";
     private static String KEY_AllShas = "KEY_AllShas";
     private Profile mProfile;
-    private AllShasItem mAllShas;
+    private ArrayList <SederItem> mSixSdarim;
     private RecyclerView myRecyclerViewStudyOptions;
     private RecyclerViewStudyOptionsSederAdapter mRecyclerViewStudyOptionsAdapter;
     private boolean mOptionTalmudBavlyOpen = false;
@@ -49,11 +50,11 @@ public class TypeStudyProfileFragment extends Fragment implements RecyclerViewSt
 
 
     // TODO: Rename and change types and number of parameters
-    public static TypeStudyProfileFragment newInstance(Profile profile, AllShasItem mAllShas) {
+    public static TypeStudyProfileFragment newInstance(Profile profile, ArrayList <SederItem> mSixSdarim) {
         TypeStudyProfileFragment fragment = new TypeStudyProfileFragment();
         Bundle args = new Bundle();
         args.putParcelable(KEY_profile, profile);
-        args.putParcelable(KEY_AllShas, mAllShas);
+        args.putParcelableArrayList(KEY_AllShas, mSixSdarim);
         fragment.setArguments(args);
         return fragment;
     }
@@ -63,7 +64,7 @@ public class TypeStudyProfileFragment extends Fragment implements RecyclerViewSt
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mProfile = getArguments().getParcelable(KEY_profile);
-            mAllShas = getArguments().getParcelable(KEY_AllShas);
+            mSixSdarim = getArguments().getParcelableArrayList(KEY_AllShas);
         }
     }
 
@@ -119,7 +120,7 @@ public class TypeStudyProfileFragment extends Fragment implements RecyclerViewSt
         myRecyclerViewStudyOptions = binding.myRecyclerView;
         myRecyclerViewStudyOptions.setVisibility(View.VISIBLE);
         myRecyclerViewStudyOptions.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerViewStudyOptionsAdapter = new RecyclerViewStudyOptionsSederAdapter(getContext(), (ArrayList<SederItem>) mAllShas.getSeder(),this);
+        mRecyclerViewStudyOptionsAdapter = new RecyclerViewStudyOptionsSederAdapter(getContext(), mSixSdarim,this);
         myRecyclerViewStudyOptions.setAdapter(mRecyclerViewStudyOptionsAdapter);
     }
 

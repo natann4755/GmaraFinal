@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import java.io.Serializable;
 import java.util.List;
 
-public class AllShasItem implements Parcelable {
+public class AllShasItem  {
 
 //    @SerializedName("seder")
     private List<SederItem> seder;
@@ -14,17 +14,6 @@ public class AllShasItem implements Parcelable {
     protected AllShasItem(Parcel in) {
     }
 
-    public static final Creator<AllShasItem> CREATOR = new Creator<AllShasItem>() {
-        @Override
-        public AllShasItem createFromParcel(Parcel in) {
-            return new AllShasItem(in);
-        }
-
-        @Override
-        public AllShasItem[] newArray(int size) {
-            return new AllShasItem[size];
-        }
-    };
 
     public List<SederItem> getSeder() {
         return seder;
@@ -34,12 +23,5 @@ public class AllShasItem implements Parcelable {
         this.seder = seder;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-    }
 }

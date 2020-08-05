@@ -57,7 +57,7 @@ public class ProfileActivity extends AppCompatActivity implements TypeStudyProfi
         View view = binding.getRoot();
         setContentView(view);
         initListAllShah();
-        openFragment(TypeStudyProfileFragment.newInstance(mProfile,mAllShas),TypeStudyProfileFragment.TAG);
+        openFragment(TypeStudyProfileFragment.newInstance(mProfile, (ArrayList<SederItem>) mAllShas.getSeder()),TypeStudyProfileFragment.TAG);
     }
 
     private void initListAllShah() {
