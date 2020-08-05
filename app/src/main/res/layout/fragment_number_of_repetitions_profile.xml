@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragment.NumberOfRepetitionsProfileFragment">
+
+    <TextView
+        android:id="@+id/NumberOfRep_ok_TV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="אישור"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ברצונך לנהל גם חזרה על הלימוד?" />
+
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/Profile_numberOfReps_RG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/radio_No_thanks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="לא תודה" />
+
+                <RadioButton
+                    android:id="@+id/radio_Once"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="פעם אחת" />
+
+                <RadioButton
+                    android:id="@+id/radio_Twice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="פעמיים" />
+
+                <RadioButton
+                    android:id="@+id/radio_3_times"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="שלש פעמים" />
+
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+</LinearLayout>

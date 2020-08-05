@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragment.TypeStudyProfileFragment">
+
+    <TextView
+        android:id="@+id/typeStudy_ok_TV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="אישור"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="מה ברצונך ללמוד?" />
+
+            <TextView
+                android:id="@+id/study_option_daf_hyomy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="דף היומי" />
+
+            <TextView
+                android:id="@+id/study_option_talmud_bavly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="תלמוד בבלי" />
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/my_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+
+
+</LinearLayout>

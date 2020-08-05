@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">myApp</string>
+    <string name="profile_choose_language">age</string>
+    <string name="firstStudy">firstStsudy</string>
+    <string name="tow_study">tow study</string>
+    <string name="three_study">three study</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
