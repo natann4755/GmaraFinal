@@ -2,6 +2,8 @@ package com.example.myapp.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +31,7 @@ import java.util.Calendar;
  */
 public class ShewStudyRvFragment extends Fragment implements AllMasechtotAdapter.NameMasechet {
     public static final String TAG = ShewStudyRvFragment.class.getSimpleName();
+    private static Bundle args;
     private FragmentShewStudyRvBinding binding;
     private ArrayList<DafLearning1> myList1 = new ArrayList<>();
     private ArrayList<String> allMasechtot;
@@ -44,7 +47,7 @@ public class ShewStudyRvFragment extends Fragment implements AllMasechtotAdapter
     // TODO: Rename and change types and number of parameters
     public static ShewStudyRvFragment newInstance(ArrayList<DafLearning1>myList1 ) {
         ShewStudyRvFragment fragment = new ShewStudyRvFragment();
-        Bundle args = new Bundle();
+        args = new Bundle();
         args.putParcelableArrayList(SplashActivity.KEY_EXTRA_List1,myList1);
         fragment.setArguments(args);
         return fragment;
@@ -71,6 +74,12 @@ public class ShewStudyRvFragment extends Fragment implements AllMasechtotAdapter
         return binding.getRoot();
     }
 
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        args.clear();
+    }
 
     private void initReciclerviewDapim() {
 

@@ -40,6 +40,11 @@ public class RecyclerViewStudyOptionsSederAdapter extends RecyclerView.Adapter<R
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         holder.setHolder(mStudyOptions.get(position));
+//        if (mDateListLocations.get(position).isOpen()){
+//            holder.setVisible(true);
+//        }else {
+//            holder.setVisible(false);
+//        }
     }
 
     @Override
@@ -67,15 +72,13 @@ public class RecyclerViewStudyOptionsSederAdapter extends RecyclerView.Adapter<R
                     mRvLinearLayout.setVisibility(View.GONE);
                 } else {
                     sederItem.setOpen(true);
+                    mRvLinearLayout.setVisibility(View.VISIBLE);
                     mMasechtotRecyclerView.setLayoutManager(new LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false));
                     mRecyclerViewStudyOptionsMasechetAdapter = new RecyclerViewStudyOptionsMasechetAdapter(sederItem.getMasechtot(), mContext, createTypeOfStudy);
                     mMasechtotRecyclerView.setAdapter(mRecyclerViewStudyOptionsMasechetAdapter);
-                    mRvLinearLayout.setVisibility(View.VISIBLE);
                 }
             });
         }
-
-
 
         public void setHolder (SederItem seder){
             this.sederItem = seder;

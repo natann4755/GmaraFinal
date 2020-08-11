@@ -27,6 +27,7 @@ import com.example.myapp.fragment.NumberOfRepetitionsProfileFragment;
 import com.example.myapp.fragment.TypeStudyProfileFragment;
 import com.example.myapp.utils.ConvertIntToPage;
 import com.example.myapp.utils.ManageSharedPreferences;
+import com.example.myapp.utils.Toast;
 import com.example.myapp.utils.UtilsCalender;
 import com.google.gson.Gson;
 
@@ -165,7 +166,11 @@ public class ProfileActivity extends AppCompatActivity implements TypeStudyProfi
 
     @Override
     public void typeStudyOk() {
-        openFragment(NumberOfRepetitionsProfileFragment.newInstance(mProfile), NumberOfRepetitionsProfileFragment.TAG);
+        if (mStringTypeOfStudy == null || mStringTypeOfStudy.equals("")){
+            Toast.Toast(this,"עליך לבחור סוג לימוד");
+        }else {
+            openFragment(NumberOfRepetitionsProfileFragment.newInstance(mProfile), NumberOfRepetitionsProfileFragment.TAG);
+        }
     }
 
     @Override

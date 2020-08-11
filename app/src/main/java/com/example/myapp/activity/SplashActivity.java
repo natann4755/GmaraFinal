@@ -17,7 +17,6 @@ public class SplashActivity extends AppCompatActivity {
     public static String KEY_EXTRA_List1 = "KEY_EXTRA_List1";
     public static String KEY_EXTRA_List2 = "KEY_EXTRA_List2";
     public static String KEY_EXTRA_List3 = "KEY_EXTRA_List3";
-
     private boolean isHaveLearning;
     private Profile mProfile;
     private ArrayList <DafLearning1> mArrayListStudy1;
@@ -31,7 +30,6 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         isFirstTime();
         setLanguage();
-
         moveToNextActivity();
         if (isHaveLearning) {
             initData();

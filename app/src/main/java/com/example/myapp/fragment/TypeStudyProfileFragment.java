@@ -3,6 +3,8 @@ package com.example.myapp.fragment;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,9 +43,6 @@ public class TypeStudyProfileFragment extends Fragment implements RecyclerViewSt
     private RecyclerViewStudyOptionsSederAdapter mRecyclerViewStudyOptionsAdapter;
     private boolean mOptionTalmudBavlyOpen = false;
 
-    private TextView studyOptionDafHyomy;
-    private TextView studyOptionTalmudBavly;
-
     public TypeStudyProfileFragment() {
         // Required empty public constructor
     }
@@ -72,9 +71,13 @@ public class TypeStudyProfileFragment extends Fragment implements RecyclerViewSt
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentTypeStudyProfileBinding.inflate(inflater, container, false);
-        initViews();
-        initListener();
         return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initListener();
     }
 
     @Override
@@ -94,16 +97,15 @@ public class TypeStudyProfileFragment extends Fragment implements RecyclerViewSt
         mListener = null;
     }
 
-    private void initViews() {
-        studyOptionDafHyomy = binding.studyOptionDafHyomy;
-        studyOptionTalmudBavly = binding.studyOptionTalmudBavly;
-    }
+
 
     private void initListener() {
-        studyOptionDafHyomy.setOnClickListener(v -> {
+
+        binding.studyOptionDafHyomy.setOnClickListener(v -> {
             mListener.updateActivityTypeStudy("דף היומי", 2711);
         });
-        studyOptionTalmudBavly.setOnClickListener(v -> {
+
+        binding.studyOptionTalmudBavly.setOnClickListener(v -> {
             if (mOptionTalmudBavlyOpen == false){
                 mOptionTalmudBavlyOpen = true;
                 initRecyclerView();
