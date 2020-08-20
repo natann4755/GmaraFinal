@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.example.model.DafLearning1;
 import com.example.myapp.R;
+import com.example.myapp.dataBase.AppDataBase;
 import com.example.myapp.databinding.ActivityMainBinding;
 import com.example.myapp.fragment.ShewStudyRvFragment;
 import com.google.android.material.tabs.TabLayout;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity  {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        myList1 = getIntent().getParcelableArrayListExtra(KEY_EXTRA_List1);
+        myList1 = initData();
         openFragment(mShewStudyRvFragment = ShewStudyRvFragment.newInstance(myList1, myList2 , myList3), ShewStudyRvFragment.TAG);
         initViews();
     }
@@ -57,5 +58,10 @@ public class MainActivity extends AppCompatActivity  {
         binding.typeOfStudy1BU.setOnClickListener(v -> {mShewStudyRvFragment.changeLearning(1);});
         binding.typeOfStudy2BU.setOnClickListener(v -> {mShewStudyRvFragment.changeLearning(2);});
         binding.typeOfStudy3BU.setOnClickListener(v -> {mShewStudyRvFragment.changeLearning(3);});
+    }
+
+    private ArrayList<DafLearning1> initData() {
+//        AppDataBase.getInstance(this).daoLearning1().deleteAll();
+        return (ArrayList<DafLearning1>) AppDataBase.getInstance(this).daoLearning1().getAllLearning();
     }
 }

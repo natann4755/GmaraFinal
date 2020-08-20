@@ -31,9 +31,9 @@ public class SplashActivity extends AppCompatActivity {
         isFirstTime();
         setLanguage();
         moveToNextActivity();
-        if (isHaveLearning) {
-            initData();
-        }
+//        if (isHaveLearning) {
+//            initData();
+//        }
     }
 
     private void isFirstTime() {
@@ -57,10 +57,10 @@ public class SplashActivity extends AppCompatActivity {
     }
 
 
-    private void initData() {
-//        AppDataBase.getInstance(this).daoLearning1().deleteAll();
-        mArrayListStudy1 = (ArrayList<DafLearning1>) AppDataBase.getInstance(this).daoLearning1().getAllLearning();
-    }
+//    private void initData() {
+////        AppDataBase.getInstance(this).daoLearning1().deleteAll();
+//        mArrayListStudy1 = (ArrayList<DafLearning1>) AppDataBase.getInstance(this).daoLearning1().getAllLearning();
+//    }
 
     private void startNextActivity() {
         if (!isHaveLearning){
@@ -68,9 +68,9 @@ public class SplashActivity extends AppCompatActivity {
             finish();
         }else {
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-            intent.putExtra(KEY_EXTRA_List1, mArrayListStudy1);
-            intent.putExtra(KEY_EXTRA_List2, mArrayListStudy2);
-            intent.putExtra(KEY_EXTRA_List3, mArrayListStudy3);
+//            intent.putExtra(KEY_EXTRA_List1, mArrayListStudy1);
+//            intent.putExtra(KEY_EXTRA_List2, mArrayListStudy2);
+//            intent.putExtra(KEY_EXTRA_List3, mArrayListStudy3);
             startActivity(intent);
             finish();
         }

@@ -125,7 +125,7 @@ public class ProfileActivity extends AppCompatActivity implements TypeStudyProfi
                         ManageSharedPreferences.setHaveLearning(true, getBaseContext());
                         AppDataBase.getInstance(getBaseContext()).daoLearning1().insertAllLearning(mListLearning);
                         Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
-                        intent.putExtra(KEY_EXTRA_List1, mListLearning);
+//                        intent.putExtra(KEY_EXTRA_List1, mListLearning);
                         startActivity(intent);
                         finish();
                         break;
