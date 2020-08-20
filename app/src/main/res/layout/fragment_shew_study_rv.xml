@@ -11,6 +11,7 @@
         android:layout_height="fill_parent"
         android:weightSum="10"
         android:orientation="vertical" >
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout_type_list"
             android:layout_width="match_parent"

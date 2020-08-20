@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +32,9 @@ public class ShewStudyRvFragment extends Fragment implements AllMasechtotAdapter
     public static final String TAG = ShewStudyRvFragment.class.getSimpleName();
     private static Bundle args;
     private FragmentShewStudyRvBinding binding;
-    private ArrayList<DafLearning1> myList1 = new ArrayList<>();
+    private ArrayList<DafLearning1> myListLearning1 = new ArrayList<>();
+    private ArrayList<DafLearning1> myListLearning2 = new ArrayList<>();
+    private ArrayList<DafLearning1> myListLearning3 = new ArrayList<>();
     private ArrayList<String> allMasechtot;
     private  RecyclerView recyclerView;
     private RecyclerView recyclerViewMasechtot;
@@ -45,10 +46,12 @@ public class ShewStudyRvFragment extends Fragment implements AllMasechtotAdapter
     }
 
     // TODO: Rename and change types and number of parameters
-    public static ShewStudyRvFragment newInstance(ArrayList<DafLearning1>myList1 ) {
+    public static ShewStudyRvFragment newInstance(ArrayList<DafLearning1>myList1, ArrayList<DafLearning1>myList2 , ArrayList<DafLearning1>myList3) {
         ShewStudyRvFragment fragment = new ShewStudyRvFragment();
         args = new Bundle();
         args.putParcelableArrayList(SplashActivity.KEY_EXTRA_List1,myList1);
+        args.putParcelableArrayList(SplashActivity.KEY_EXTRA_List2,myList2);
+        args.putParcelableArrayList(SplashActivity.KEY_EXTRA_List3,myList3);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,7 +60,9 @@ public class ShewStudyRvFragment extends Fragment implements AllMasechtotAdapter
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            myList1 = getArguments().getParcelableArrayList(SplashActivity.KEY_EXTRA_List1);
+            myListLearning1 = getArguments().getParcelableArrayList(SplashActivity.KEY_EXTRA_List1);
+            myListLearning2 = getArguments().getParcelableArrayList(SplashActivity.KEY_EXTRA_List2);
+            myListLearning3 = getArguments().getParcelableArrayList(SplashActivity.KEY_EXTRA_List3);
         }
     }
 
@@ -65,12 +70,6 @@ public class ShewStudyRvFragment extends Fragment implements AllMasechtotAdapter
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentShewStudyRvBinding.inflate(inflater, container, false);
-        initTabLayout();
-        if (myList1.size()>2000) {
-            initReciclerviewMasechtot();
-            binding.showStudyRVMasechtot.setVisibility(View.VISIBLE);
-        }
-        initReciclerviewDapim();
         return binding.getRoot();
     }
 
@@ -79,19 +78,38 @@ public class ShewStudyRvFragment extends Fragment implements AllMasechtotAdapter
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         args.clear();
+        initTabLayout();
+        initLearning(1);
+        initReciclerviewDapim();
+    }
+
+    private void initLearning(int typeOfStudy) {
+        int listSize = 0;
+        switch (typeOfStudy) {
+            case 1:
+                if (myListLearning1 != null && myListLearning1.size()>0)
+                listSize = myListLearning1.size();
+            case 2:
+                if (myListLearning2 != null && myListLearning2.size()>0)
+                listSize = myListLearning2.size();
+            case 3:
+                if (myListLearning2 != null && myListLearning2.size()>0)
+                listSize = myListLearning3.size();
+        }
+        if (listSize >2000) {
+            initReciclerviewMasechtot();
+            binding.showStudyRVMasechtot.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initReciclerviewDapim() {
-
         recyclerView = binding.showStudyRVDapim;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        myAdapter = new OneDafAdapter(getContext(), myList1);
+        myAdapter = new OneDafAdapter(getContext(), myListLearning1 , myListLearning2 , myListLearning3);
         recyclerView.setAdapter(myAdapter);
-
-        if (myList1.size()>2000){
+        if (myListLearning1.size()>2000){
             int todayDaf = findTodayDafMoveRV();
             if (todayDaf != -1) {
-//            recyclerViewMasechtot.findViewHolderForLayoutPosition(todayDaf).itemView.performClick();
                 recyclerView.scrollToPosition(todayDaf);
             }
         }
@@ -101,18 +119,16 @@ public class ShewStudyRvFragment extends Fragment implements AllMasechtotAdapter
         recyclerViewMasechtot = binding.showStudyRVMasechtot;
         recyclerViewMasechtot.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         allMasechtot = new ArrayList<>();
-        for (int i = 1; i <myList1.size() ; i++) {
+        for (int i = 1; i < myListLearning1.size() ; i++) {
             if (allMasechtot.size()==0){
-                allMasechtot.add(myList1.get(i).getMasechet());
-            }else if(!myList1.get(i).getMasechet().equals(allMasechtot.get(allMasechtot.size()-1))){
-                allMasechtot.add(myList1.get(i).getMasechet());
+                allMasechtot.add(myListLearning1.get(i).getMasechet());
+            }else if(!myListLearning1.get(i).getMasechet().equals(allMasechtot.get(allMasechtot.size()-1))){
+                allMasechtot.add(myListLearning1.get(i).getMasechet());
             }
         }
 
-
             AllMasechtotAdapter myAdapter2 = new AllMasechtotAdapter(getContext(),allMasechtot,this);
             recyclerViewMasechtot.setAdapter(myAdapter2);
-
             }
 
 
@@ -120,8 +136,8 @@ public class ShewStudyRvFragment extends Fragment implements AllMasechtotAdapter
     private int findTodayDafMoveRV() {
         int todayDafInList = -1;
         String today = UtilsCalender.dateStringFormat(Calendar.getInstance());
-        for (int i = 0; i < myList1.size(); i++) {
-            if (myList1.get(i).getPageDate().equals(today)) {
+        for (int i = 0; i < myListLearning1.size(); i++) {
+            if (myListLearning1.get(i).getPageDate().equals(today)) {
                 todayDafInList = i;
                 break;
             }
@@ -150,7 +166,7 @@ public class ShewStudyRvFragment extends Fragment implements AllMasechtotAdapter
                     public void onTabSelected(TabLayout.Tab tab) {
                         int tabSelected = tab.getPosition();
                         if(tabSelected==0){
-                            if (myList1.size() > 2000) {
+                            if (myListLearning1.size() > 2000) {
                                 binding.showStudyRVMasechtot.setVisibility(View.VISIBLE);
                             }
                             myAdapter.filterAllDapim();
@@ -158,12 +174,12 @@ public class ShewStudyRvFragment extends Fragment implements AllMasechtotAdapter
                         }
                         if(tabSelected==1) {
                             binding.showStudyRVMasechtot.setVisibility(View.GONE);
-                            myAdapter.filterLearnet();
+                            myAdapter.filterLearned();
                             recyclerView.scrollToPosition(0);
                         }
                         if(tabSelected==2) {
                             binding.showStudyRVMasechtot.setVisibility(View.GONE);
-                            myAdapter.filterSkipt();
+                            myAdapter.filterSkipped();
                             recyclerView.scrollToPosition(0);
                         }
             }
@@ -177,7 +193,7 @@ public class ShewStudyRvFragment extends Fragment implements AllMasechtotAdapter
             public void onTabReselected(TabLayout.Tab tab) {
                 int tabSelected = tab.getPosition();
                 if(tabSelected==0){
-                    if (myList1.size() > 2000) {
+                    if (myListLearning1.size() > 2000) {
                         myAdapter.filterAllDapim();
                         recyclerView.scrollToPosition(0);
                     }
@@ -186,8 +202,10 @@ public class ShewStudyRvFragment extends Fragment implements AllMasechtotAdapter
         });
     }
 
-
-
+    public void changeLearning (int typeOfStudy){
+        initLearning(typeOfStudy);
+        myAdapter.filterChangeTypeStudy(typeOfStudy);
+    }
 
     @Override
     public void nameMasechet(String nameMasechet) {

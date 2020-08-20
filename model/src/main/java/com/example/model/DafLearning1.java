@@ -10,9 +10,10 @@ import androidx.room.PrimaryKey;
 import java.util.Calendar;
 
 @Entity
-public class DafLearning1 implements Parcelable {
+public class DafLearning1 implements Parcelable  {
     @PrimaryKey
     private int id;
+    private int indexTypeOfStudy;
     private String masechet;
     private int pageNumber;
     private boolean isLearning;
@@ -25,6 +26,7 @@ public class DafLearning1 implements Parcelable {
 
     protected DafLearning1(Parcel in) {
         id = in.readInt();
+        indexTypeOfStudy = in.readInt();
         masechet = in.readString();
         pageNumber = in.readInt();
         isLearning = in.readByte() != 0;
@@ -49,6 +51,14 @@ public class DafLearning1 implements Parcelable {
 
     public String getTypeOfStudy() {
         return typeOfStudy;
+    }
+
+    public int getIndexTypeOfStudy() {
+        return indexTypeOfStudy;
+    }
+
+    public void setIndexTypeOfStudy(int indexTypeOfStudy) {
+        this.indexTypeOfStudy = indexTypeOfStudy;
     }
 
     public void setTypeOfStudy(String typeOfStudy) {
@@ -129,7 +139,6 @@ public class DafLearning1 implements Parcelable {
         isLearningPage2 = learningPage2;
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -138,6 +147,7 @@ public class DafLearning1 implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
+        dest.writeInt(indexTypeOfStudy);
         dest.writeString(masechet);
         dest.writeInt(pageNumber);
         dest.writeByte((byte) (isLearning ? 1 : 0));

@@ -21,7 +21,6 @@ import com.example.model.shas_masechtot_list_models.SederItem;
 import com.example.myapp.R;
 import com.example.myapp.adapters.RecyclerViewStudyOptionsMasechetAdapter;
 import com.example.myapp.adapters.RecyclerViewStudyOptionsSederAdapter;
-import com.example.myapp.databinding.FragmentTypeStudyBinding;
 import com.example.myapp.databinding.FragmentTypeStudyProfileBinding;
 
 import java.util.ArrayList;

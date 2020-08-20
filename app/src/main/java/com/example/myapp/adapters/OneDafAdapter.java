@@ -27,21 +27,24 @@ public class OneDafAdapter extends RecyclerView.Adapter<OneDafAdapter.ViewHolder
     private LayoutInflater mInflater;
     private Context context;
     private Profile mProfile;
-    private ArrayList<DafLearning1> myListALLDaf = new ArrayList<>();
-    private ArrayList<DafLearning1> myListDaf = new ArrayList<>();
+    private ArrayList<DafLearning1> myListMaster1 = new ArrayList<>();
+    private ArrayList<DafLearning1> myListMaster2 = new ArrayList<>();
+    private ArrayList<DafLearning1> myListMaster3 = new ArrayList<>();
 
+    private ArrayList<DafLearning1> myListALLDaf = new ArrayList<>();
+    private ArrayList<DafLearning1> myListDafToDisplay = new ArrayList<>();
     private ArrayList<DafLearning1> myListFilterDaf = new ArrayList<>();
 
-    public OneDafAdapter(Context context, ArrayList<DafLearning1> myListDaf) {
+    public OneDafAdapter(Context context, ArrayList<DafLearning1> myListMaster1 , ArrayList<DafLearning1> myListMaster2, ArrayList<DafLearning1> myListMaster3) {
         this.context = context;
         this.mInflater = LayoutInflater.from(context);
-        this.myListALLDaf = myListDaf;
-        this.myListDaf.addAll(myListALLDaf);
+        this.myListMaster1 = myListMaster1;
+        this.myListMaster2 = myListMaster2;
+        this.myListMaster3 = myListMaster3;
+        this.myListALLDaf.addAll(myListMaster1);
+        this.myListDafToDisplay.addAll(myListALLDaf);
         initProfile();
-
     }
-
-
 
     @NonNull
     @Override
@@ -52,18 +55,37 @@ public class OneDafAdapter extends RecyclerView.Adapter<OneDafAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.setHolder(myListDaf.get(position));
+        holder.setHolder(myListDafToDisplay.get(position));
 
     }
 
     @Override
     public int getItemCount() {
-        return myListDaf.size();
+        return myListDafToDisplay.size();
     }
 
     private void initProfile() {
         mProfile = ManageSharedPreferences.getProfile(context);
     }
+
+    public void filterChangeTypeStudy(int typeStudy){
+        switch(typeStudy) {
+            case 1:
+                myListALLDaf.addAll(myListMaster1);
+                changeDisplayList(myListALLDaf);
+                break;
+            case 2:
+                myListALLDaf.addAll(myListMaster2);
+                changeDisplayList(myListALLDaf);
+                break;
+            case 3:
+                myListALLDaf.addAll(myListMaster3);
+                changeDisplayList(myListALLDaf);
+                break;
+        }
+    }
+
+
 
     public void filterAllMasechtot(String myNameMasechet){
         myListFilterDaf.clear();
@@ -72,29 +94,26 @@ public class OneDafAdapter extends RecyclerView.Adapter<OneDafAdapter.ViewHolder
                 myListFilterDaf.add(myListALLDaf.get(i));
             }
         }
-        myListDaf.clear();
-        myListDaf.addAll(myListFilterDaf);
-        notifyDataSetChanged();
+        changeDisplayList(myListFilterDaf);
     }
 
-    public void filterLearnet(){
+    public void filterLearned(){
         myListFilterDaf.clear();
         for (int i = 0; i <myListALLDaf.size() ; i++) {
             if (myListALLDaf.get(i).isLearning()) {
                 myListFilterDaf.add(myListALLDaf.get(i));
             }
         }
-        myListDaf.clear();
         Collections.reverse(myListFilterDaf);
-        myListDaf.addAll(myListFilterDaf);
-        notifyDataSetChanged();
+        changeDisplayList(myListFilterDaf);
     }
-    public void filterSkipt(){
+
+    public void filterSkipped(){
         myListFilterDaf.clear();
         int todayDaf = -1;
         int myLastLerneng = -1;
         if(myListALLDaf.size()<2000){
-            myLastLerneng = findLastLerneng();
+            myLastLerneng = findLastLearned();
             if (myLastLerneng != -1) {
                 for (int i = 0; i <= myLastLerneng; i++) {
                     if (!myListALLDaf.get(i).isLearning()) {
@@ -113,22 +132,21 @@ public class OneDafAdapter extends RecyclerView.Adapter<OneDafAdapter.ViewHolder
                 }
             }
         }
-
-        myListDaf.clear();
         Collections.reverse(myListFilterDaf);
-        myListDaf.addAll(myListFilterDaf);
-        notifyDataSetChanged();
+        changeDisplayList(myListFilterDaf);
     }
-    private int findLastLerneng() {
-        int lastLerneng =-1;
-        for (int i = 0; i <myListALLDaf.size() ; i++) {
+
+    private int findLastLearned() {
+        int lastLearned =-1;
+        for (int i = myListALLDaf.size()-1; i >= 0 ; i--) {
             if (myListALLDaf.get(i).isLearning()) {
-                lastLerneng = i;
+                lastLearned = i;
+                break;
             }
         }
-        return lastLerneng;
-
+        return lastLearned;
     }
+
     public  int findTodayDafMoveRV() {
         int todayDafInList = -1;
         String today = UtilsCalender.dateStringFormat(Calendar.getInstance());
@@ -140,9 +158,14 @@ public class OneDafAdapter extends RecyclerView.Adapter<OneDafAdapter.ViewHolder
         }
         return todayDafInList;
     }
+
     public void filterAllDapim(){
-        myListDaf.clear();
-        myListDaf.addAll(myListALLDaf);
+        changeDisplayList(myListALLDaf);
+    }
+
+    private void changeDisplayList(ArrayList<DafLearning1> mNewList) {
+        myListDafToDisplay.clear();
+        myListDafToDisplay.addAll(mNewList);
         notifyDataSetChanged();
     }
 

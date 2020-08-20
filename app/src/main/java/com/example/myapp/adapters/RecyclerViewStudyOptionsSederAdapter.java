@@ -40,11 +40,6 @@ public class RecyclerViewStudyOptionsSederAdapter extends RecyclerView.Adapter<R
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         holder.setHolder(mStudyOptions.get(position));
-//        if (mDateListLocations.get(position).isOpen()){
-//            holder.setVisible(true);
-//        }else {
-//            holder.setVisible(false);
-//        }
     }
 
     @Override
