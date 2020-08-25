@@ -62,6 +62,6 @@ public class MainActivity extends AppCompatActivity  {
 
     private ArrayList<DafLearning1> initData() {
 //        AppDataBase.getInstance(this).daoLearning1().deleteAll();
-        return (ArrayList<DafLearning1>) AppDataBase.getInstance(this).daoLearning1().getAllLearning();
+        return (ArrayList<DafLearning1>) AppDataBase.getInstance(this).daoLearning1().getAllLearning(1);
     }
 }

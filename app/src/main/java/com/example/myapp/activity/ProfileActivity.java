@@ -92,7 +92,7 @@ public class ProfileActivity extends AppCompatActivity implements TypeStudyProfi
             for (int j = 0; j < mAllShas.getSeder().get(i).getMasechtot().size(); j++) {
                 for (int k = 2; k < (mAllShas.getSeder().get(i).getMasechtot().get(j).getPages() + 2); k++) {
                     int masecetPage = ConvertIntToPage.fixKinimTamidMidot(k,mAllShas.getSeder().get(i).getMasechtot().get(j).getName());
-                    DafLearning1 mPage = new DafLearning1(mAllShas.getSeder().get(i).getMasechtot().get(j).getName(), masecetPage,"דף היומי" ,id);
+                    DafLearning1 mPage = new DafLearning1(mAllShas.getSeder().get(i).getMasechtot().get(j).getName(), masecetPage,"דף היומי" ,1,id);
 //                    mPage.setPageDate(startDafHayomi.get(Calendar.DAY_OF_MONTH) + "/" + (startDafHayomi.get(Calendar.MONTH) + 1) + "/" + startDafHayomi.get(Calendar.YEAR));
                     mPage.setPageDate(UtilsCalender.dateStringFormat(startDafHayomi));
                     mListLearning.add(mPage);
@@ -109,7 +109,7 @@ public class ProfileActivity extends AppCompatActivity implements TypeStudyProfi
         mListLearning.clear();
         int id = 1;
         for (int i = 2 ; i < (pages+2) ; i++) {
-            mListLearning.add(new DafLearning1(masechetName, ConvertIntToPage.fixKinimTamidMidot(i,masechetName),masechetName, id));
+            mListLearning.add(new DafLearning1(masechetName, ConvertIntToPage.fixKinimTamidMidot(i,masechetName),masechetName,1 ,id));
             id++;
         }
     }

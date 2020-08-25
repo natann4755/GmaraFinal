@@ -73,11 +73,12 @@ public class DafLearning1 implements Parcelable  {
         this.pageDate = pageDate;
     }
 
-    public DafLearning1(String masechet, int pageNumber, String typeOfStudy, int id ) {
+    public DafLearning1(String masechet, int pageNumber, String typeOfStudy, int indexTypeOfStudy, int id ) {
         this.masechet = masechet;
         this.pageNumber = pageNumber;
         this.id = id;
         this.typeOfStudy =typeOfStudy;
+        this.indexTypeOfStudy = indexTypeOfStudy;
     }
 
 

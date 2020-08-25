@@ -12,8 +12,8 @@ import java.util.List;
 
 @Dao
 public interface DaoLearning1 {
-    @Query("SELECT * FROM DafLearning1")
-    List<DafLearning1> getAllLearning();
+    @Query("SELECT * FROM DafLearning1 WHERE indexTypeOfStudy = :typeOfStudy")
+    List<DafLearning1> getAllLearning(int typeOfStudy);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAllLearning(Collection<DafLearning1> AllLearning);
