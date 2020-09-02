@@ -1,4 +1,4 @@
-package com.example.model.shas_masechtot_list_models;
+package com.example.model.shas_masechtot;
 
 import android.os.Parcel;
 import android.os.Parcelable;

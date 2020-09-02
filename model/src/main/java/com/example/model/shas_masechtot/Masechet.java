@@ -1,7 +1,4 @@
-package com.example.model.shas_masechtot_list_models;
-
-import android.os.Parcel;
-import android.os.Parcelable;
+package com.example.model.shas_masechtot;
 
 import com.google.gson.annotations.SerializedName;
 
